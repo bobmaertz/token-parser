@@ -1,3 +1,19 @@
+/*
+token-parser will parse and output claims from a JWT token
+
+Usage:
+
+    token-parser [flags] [path ...]
+
+The commands are: 
+    version - print the version of the tool 
+    inspect - inspect a token (stdin) 
+
+The flags are:
+
+    -t string - the type of token being inspected (default "jwt")
+    -v string -  the verifier type of token being inspected (default "none")
+*/
 package main
 
 import (
@@ -15,12 +31,14 @@ const (
 )
 
 var (
-	//TODO: placeholders, not used yet
+	// TODO: placeholders, not used yet
 	tokenType string
 	verifier  string
 
 	commands = map[string]func([]string){
-		"version": version.Print,
+		"version": func(_ []string) {
+			version.Print()
+		},
 		"inspect": func(s []string) {
 			inspector := inspector.JwtNopInspector{}
 			result, err := inspector.Inspect(s[0])
@@ -33,7 +51,6 @@ var (
 )
 
 func init() {
-
 	flag.StringVar(&tokenType, "t", defaultType, "the type of token being inspected")
 	flag.StringVar(&verifier, "v", defaultVerifier, "the verifier type of token being inspected")
 

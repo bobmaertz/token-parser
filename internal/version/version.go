@@ -7,6 +7,6 @@ var (
 	Build   string
 )
 
-func Print([]string) {
+func Print() {
 	fmt.Printf("Version: %s, Build %s", Version, Build)
 }

@@ -1,3 +1,4 @@
+// Package inspector provides functionality for introspecting json-web-tokens 
 package inspector
 
 import "errors"
