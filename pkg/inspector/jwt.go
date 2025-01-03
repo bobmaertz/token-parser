@@ -11,7 +11,7 @@ type Inspector interface {
 	Inspect(token string) (ParsedToken, error)
 }
 
-// JWT is the ouput of this package. This is more complex than i like
+// ParsedToken is the ouput of this package 
 type ParsedToken struct {
 	HeaderRaw    string
 	ClaimRaw     string
@@ -21,6 +21,7 @@ type ParsedToken struct {
 	Claims map[string]interface{}
 }
 
+// Headers represents the token header information 
 type Header struct {
 	Algorithm   string
 	Type        string

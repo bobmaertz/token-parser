@@ -4,12 +4,12 @@ import "github.com/cristalhq/jwt/v5"
 
 type JwtNopInspector struct{}
 
+// Inspect will take a raw string (token) and export the token data with 
+// no verification 
 func (j *JwtNopInspector) Inspect(raw string) (ParsedToken, error) {
-
 	r := []byte(raw)
 	token, err := jwt.ParseNoVerify(r)
 	if err != nil {
-		//TODO: Debug logs
 		return ParsedToken{}, ErrInvalidToken
 	}
 	out := ParsedToken{
@@ -25,7 +25,6 @@ func (j *JwtNopInspector) Inspect(raw string) (ParsedToken, error) {
 	c := make(map[string]interface{})
 	err = token.DecodeClaims(&c)
 	if err != nil {
-		//TODO: Debug logs
 		return out, ErrInvalidClaims
 	}
 	out.Claims = c
